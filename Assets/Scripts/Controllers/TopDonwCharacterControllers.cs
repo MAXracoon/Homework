@@ -5,18 +5,36 @@ using UnityEngine;
 
 public class TopDonwCharacterControllers : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // event 외부에서는 호출하지 못하게 막는다
+    public event Action<Vector2> OnmoveEvent;
+    public event Action<Vector2> OnlookEvent;
+
+    public void CallMoveEvent(Vector2 direction)
     {
-        
+        OnmoveEvent?.Invoke(direction);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void CallLookEvent(Vector2 direction)
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-
-        transform.position += new Vector3(x, y) * Time.deltaTime;
+        OnlookEvent.Invoke(direction);
     }
 }
+
+//이동 연습 코트
+//{
+//    [SerializeField] private float speed = 5f;
+//    // Start is called before the first frame update
+//    void Start()
+//    {
+        
+//    }
+
+//    // Update is called once per frame
+//    void  Update()
+//    {
+//        // Drag, Ctrl + K C 주석  K U 풀기
+//        //float x = Input.GetAxisRaw("Horizontal");
+//        //float y = Input.GetAxisRaw("Vertical");
+
+//        //transform.position += new Vector3(x, y) * speed * Time.deltaTime; 
+//    }
+//}
